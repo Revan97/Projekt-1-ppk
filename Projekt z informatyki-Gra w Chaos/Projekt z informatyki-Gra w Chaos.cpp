@@ -10,32 +10,35 @@
 
 using namespace std;
 
-void point(int pointA_x, int pointA_y, int pointB_x, int pointB_y, int pointC_x, int pointC_y, int pointD_x, int pointD_y, int lkrokow, char tablica[48][96]);
+const int pointA_x = 47;
+const int pointA_y = 0;
+const int pointB_x = 47;
+const int pointB_y = 95;
+const int pointC_x = 22;
+const int pointC_y = 45;
+const int size_x = 48;
+const int size_y = 96;
+const float half_of = 0.5;
+
+void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]);
 
 int main()
 {
 	srand(time(NULL));
-	const int pointA_x = 47;
-	const int pointA_y = 0;
-	const int pointB_x = 47;
-	const int pointB_y = 95;
-	const int pointC_x = 22;
-	const int pointC_y = 45;
-
 
 	int pointD_x, pointD_y;
-	pointD_x = rand() % 48;
-	pointD_y = rand() % 96;
+	pointD_x = rand() % size_x;
+	pointD_y = rand() % size_y;
 
-	char tablica[48][96];
+	char tablica[size_x][size_y];
 
 	int lkrokow;
 	cout << "Podaj ilosc krokow: ";
 	cin >> lkrokow;
 
-	for (int i = 0; i<48; i++)
+	for (int i = 0; i<size_x; i++)
 	{
-		for (int j = 0; j<96; j++)
+		for (int j = 0; j<size_y; j++)
 		{
 			tablica[i][j] = '0';
 		}
@@ -46,15 +49,15 @@ int main()
 	tablica[pointC_x][pointC_y] = '=';
 	tablica[pointD_x][pointD_y] = '+';
 
-	point(pointA_x, pointA_y, pointB_x, pointB_y, pointC_x, pointC_y, pointD_x, pointD_y, lkrokow, tablica);
+	point(pointD_x, pointD_y, lkrokow, tablica);
 
-	for (int i = 0; i<48; i++)
+	for (int i = 0; i<size_x; i++)
 	{
 		if (i != 0)
 		{
 			cout << endl;
 		}
-		for (int j = 0; j<96; j++)
+		for (int j = 0; j<size_y; j++)
 		{
 			cout << tablica[i][j];
 		}
@@ -63,7 +66,7 @@ int main()
 	cin.get();
 	return 0;
 }
-void point(int pointA_x, int pointA_y, int pointB_x, int pointB_y, int pointC_x, int pointC_y, int pointD_x, int pointD_y, int lkrokow, char tablica[48][96])
+void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y])
 {
 	for (int n = 0; n < lkrokow; n++)
 	{
@@ -71,20 +74,20 @@ void point(int pointA_x, int pointA_y, int pointB_x, int pointB_y, int pointC_x,
 
 		if (kostka == 1)
 		{
-			pointD_x = 0.5*(pointA_x + pointD_x);
-			pointD_y = 0.5*(pointA_y + pointD_y);
+			pointD_x =half_of*(pointA_x + pointD_x);
+			pointD_y = half_of*(pointA_y + pointD_y);
 		}
 		else
 			if (kostka == 2)
 			{
-				pointD_x = 0.5*(pointB_x + pointD_x);
-				pointD_y = 0.5*(pointB_y + pointD_y);
+				pointD_x = half_of*(pointB_x + pointD_x);
+				pointD_y = half_of*(pointB_y + pointD_y);
 			}
 			else
 				if (kostka == 3)
 				{
-					pointD_x = 0.5*(pointC_x + pointD_x);
-					pointD_y = 0.5*(pointC_y + pointD_y);
+					pointD_x = half_of*(pointC_x + pointD_x);
+					pointD_y = half_of*(pointC_y + pointD_y);
 				}
 		if (tablica[pointD_x][pointD_y] != '=')
 		{
