@@ -10,22 +10,22 @@
 
 using namespace std;
 
-void point(int ax, int ay, int bx, int by, int cx, int cy, int dx, int dy, int lkrokow, char tablica[48][96]);
-//s
+void point(int pointA_x, int pointA_y, int pointB_x, int pointB_y, int pointC_x, int pointC_y, int pointD_x, int pointD_y, int lkrokow, char tablica[48][96]);
+
 int main()
 {
 	srand(time(NULL));
-	const int ax = 47;
-	const int ay = 0;
-	const int bx = 47;
-	const int by = 95;
-	const int cx = 22;
-	const int cy = 45;
+	const int pointA_x = 47;
+	const int pointA_y = 0;
+	const int pointB_x = 47;
+	const int pointB_y = 95;
+	const int pointC_x = 22;
+	const int pointC_y = 45;
 
 
-	int dx, dy;
-	dx = rand() % 48;
-	dy = rand() % 96;
+	int pointD_x, pointD_y;
+	pointD_x = rand() % 48;
+	pointD_y = rand() % 96;
 
 	char tablica[48][96];
 
@@ -41,12 +41,12 @@ int main()
 		}
 	}
 
-	tablica[ax][ay] = '=';
-	tablica[bx][by] = '=';
-	tablica[cx][cy] = '=';
-	tablica[dx][dy] = '+';
+	tablica[pointA_x][pointA_y] = '=';
+	tablica[pointB_x][pointB_y] = '=';
+	tablica[pointC_x][pointC_y] = '=';
+	tablica[pointD_x][pointD_y] = '+';
 
-	point(ax, ay, bx, by, cx, cy, dx, dy, lkrokow, tablica);
+	point(pointA_x, pointA_y, pointB_x, pointB_y, pointC_x, pointC_y, pointD_x, pointD_y, lkrokow, tablica);
 
 	for (int i = 0; i<48; i++)
 	{
@@ -63,7 +63,7 @@ int main()
 	cin.get();
 	return 0;
 }
-void point(int ax, int ay, int bx, int by, int cx, int cy, int dx, int dy, int lkrokow, char tablica[48][96])
+void point(int pointA_x, int pointA_y, int pointB_x, int pointB_y, int pointC_x, int pointC_y, int pointD_x, int pointD_y, int lkrokow, char tablica[48][96])
 {
 	for (int n = 0; n < lkrokow; n++)
 	{
@@ -71,24 +71,24 @@ void point(int ax, int ay, int bx, int by, int cx, int cy, int dx, int dy, int l
 
 		if (kostka == 1)
 		{
-			dx = 0.5*(ax + dx);
-			dy = 0.5*(ay + dy);
+			pointD_x = 0.5*(pointA_x + pointD_x);
+			pointD_y = 0.5*(pointA_y + pointD_y);
 		}
 		else
 			if (kostka == 2)
 			{
-				dx = 0.5*(bx + dx);
-				dy = 0.5*(by + dy);
+				pointD_x = 0.5*(pointB_x + pointD_x);
+				pointD_y = 0.5*(pointB_y + pointD_y);
 			}
 			else
 				if (kostka == 3)
 				{
-					dx = 0.5*(cx + dx);
-					dy = 0.5*(cy + dy);
+					pointD_x = 0.5*(pointC_x + pointD_x);
+					pointD_y = 0.5*(pointC_y + pointD_y);
 				}
-		if (tablica[dx][dy] != '=')
+		if (tablica[pointD_x][pointD_y] != '=')
 		{
-			tablica[dx][dy] = '+';
+			tablica[pointD_x][pointD_y] = '+';
 		}
 	}
 }
