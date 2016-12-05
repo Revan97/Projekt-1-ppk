@@ -11,7 +11,7 @@
 using namespace std;
 
 void point(int ax, int ay, int bx, int by, int cx, int cy, int dx, int dy, int lkrokow, char tablica[48][96]);
-
+//s
 int main()
 {
 	srand(time(NULL));
