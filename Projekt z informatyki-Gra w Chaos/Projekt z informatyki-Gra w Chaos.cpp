@@ -21,7 +21,7 @@ const int size_y = 96;
 const float half_of = 0.5;
 
 void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]);
-
+void tab(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]);
 int main()
 {
 	srand(time(NULL));
@@ -36,32 +36,8 @@ int main()
 	cout << "Podaj ilosc krokow: ";
 	cin >> lkrokow;
 
-	for (int i = 0; i<size_x; i++)
-	{
-		for (int j = 0; j<size_y; j++)
-		{
-			tablica[i][j] = '0';
-		}
-	}
+	tab(pointD_x, pointD_y, lkrokow, tablica);
 
-	tablica[pointA_x][pointA_y] = '=';
-	tablica[pointB_x][pointB_y] = '=';
-	tablica[pointC_x][pointC_y] = '=';
-	tablica[pointD_x][pointD_y] = '+';
-
-	point(pointD_x, pointD_y, lkrokow, tablica);
-
-	for (int i = 0; i<size_x; i++)
-	{
-		if (i != 0)
-		{
-			cout << endl;
-		}
-		for (int j = 0; j<size_y; j++)
-		{
-			cout << tablica[i][j];
-		}
-	}
 	cin.get();
 	cin.get();
 	return 0;
@@ -94,4 +70,40 @@ void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]
 			tablica[pointD_x][pointD_y] = '+';
 		}
 	}
+}
+void tab(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y])
+{
+
+	for (int i = 0; i<size_x; i++)
+	{
+		for (int j = 0; j<size_y; j++)
+		{
+			tablica[i][j] = '0';
+		}
+	}
+
+	tablica[pointA_x][pointA_y] = '=';
+	tablica[pointB_x][pointB_y] = '=';
+	tablica[pointC_x][pointC_y] = '=';
+	tablica[pointD_x][pointD_y] = '+';
+
+	point(pointD_x, pointD_y, lkrokow, tablica);
+
+	ofstream to_file;
+	to_file.open("dane.txt");
+
+	for (int i = 0; i<size_x; i++)
+	{
+		if (i != 0)
+		{
+			cout << endl;
+			to_file << endl;
+		}
+		for (int j = 0; j<size_y; j++)
+		{
+			cout << tablica[i][j];
+			to_file << tablica[i][j];
+		}
+	}
+	to_file.close();
 }
