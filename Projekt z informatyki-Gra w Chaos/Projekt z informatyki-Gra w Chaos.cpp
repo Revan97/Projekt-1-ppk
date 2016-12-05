@@ -3,12 +3,12 @@
 
 #include "stdafx.h"
 #include <iostream>
+#include <fstream>
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
 
 using namespace std;
-
 
 void point(int ax, int ay, int bx, int by, int cx, int cy, int dx, int dy, int lkrokow, char tablica[48][96]);
 
@@ -21,6 +21,7 @@ int main()
 	const int by = 95;
 	const int cx = 22;
 	const int cy = 45;
+
 
 	int dx, dy;
 	dx = rand() % 48;
@@ -64,7 +65,7 @@ int main()
 }
 void point(int ax, int ay, int bx, int by, int cx, int cy, int dx, int dy, int lkrokow, char tablica[48][96])
 {
-	for (int n = 0; n<lkrokow; n++)
+	for (int n = 0; n < lkrokow; n++)
 	{
 		int kostka = (rand() % 3) + 1;
 
@@ -90,3 +91,4 @@ void point(int ax, int ay, int bx, int by, int cx, int cy, int dx, int dy, int l
 			tablica[dx][dy] = '+';
 		}
 	}
+}
