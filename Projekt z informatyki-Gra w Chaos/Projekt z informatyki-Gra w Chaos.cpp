@@ -21,7 +21,7 @@ const int size_y = 96;
 const float half_of = 0.5;
 
 void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]);
-void tab(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]);
+void tab(bool file, int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]);
 int main()
 {
 	srand(time(NULL));
@@ -31,22 +31,42 @@ int main()
 	pointD_y = rand() % size_y;
 
 	char tablica[size_x][size_y];
-
 	int lkrokow;
+	bool file=true||false;
+	char write = 't' || 'n';
 	cout << "Podaj ilosc krokow: ";
 	cin >> lkrokow;
-
-	tab(pointD_x, pointD_y, lkrokow, tablica);
+	while (write != 't' || 'n')
+	{
+		cout << "Czy chcesz wypisac dane do pliku[Tak-t/Nie-n]: ";
+		cin >> write;
+		if (write == 't')
+		{
+			file = true;
+			tab(file, pointD_x, pointD_y, lkrokow, tablica);
+		}
+		else
+			if (write == 'n')
+			{
+				file = false;
+				tab(file, pointD_x, pointD_y, lkrokow, tablica);
+			}
+			else
+				if (write != 't' || 'n')
+				{
+					cout << "Wpisa³es niepoprawna znak, sprobuj ponownie. " << endl;
+				}
+	} 
 
 	cin.get();
 	cin.get();
 	return 0;
 }
-void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y])
+void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]) //oblicza nowe wspó³¿êdne punktu D
 {
 	for (int n = 0; n < lkrokow; n++)
 	{
-		int kostka = (rand() % 3) + 1;
+		int kostka = (rand() % 3) + 1; //losowanie wartoœci od 1-3
 
 		if (kostka == 1)
 		{
@@ -65,13 +85,13 @@ void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]
 					pointD_x = half_of*(pointC_x + pointD_x);
 					pointD_y = half_of*(pointC_y + pointD_y);
 				}
-		if (tablica[pointD_x][pointD_y] != '=')
+		if (tablica[pointD_x][pointD_y] != '=') // nie pozawala na zastapienie wierzcho³ka trójk¹ta
 		{
 			tablica[pointD_x][pointD_y] = '+';
 		}
 	}
 }
-void tab(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y])
+void tab(bool file, int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]) // rysuje tablice ,na której zostan¹ naniesione punkty
 {
 
 	for (int i = 0; i<size_x; i++)
@@ -81,7 +101,6 @@ void tab(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y])
 			tablica[i][j] = '0';
 		}
 	}
-
 	tablica[pointA_x][pointA_y] = '=';
 	tablica[pointB_x][pointB_y] = '=';
 	tablica[pointC_x][pointC_y] = '=';
@@ -89,21 +108,38 @@ void tab(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y])
 
 	point(pointD_x, pointD_y, lkrokow, tablica);
 
-	ofstream to_file;
-	to_file.open("dane.txt");
-
-	for (int i = 0; i<size_x; i++)
+	if (file = true)
 	{
-		if (i != 0)
+		ofstream to_file;
+		to_file.open("dane.txt");
+		for (int i = 0; i<size_x; i++)
 		{
-			cout << endl;
-			to_file << endl;
+			if (i != 0)
+			{
+				cout << endl;
+				to_file << endl;
+			}
+			for (int j = 0; j<size_y; j++)
+			{
+				cout << tablica[i][j];
+				to_file << tablica[i][j];
+			}
 		}
-		for (int j = 0; j<size_y; j++)
-		{
-			cout << tablica[i][j];
-			to_file << tablica[i][j];
-		}
+		to_file.close();
 	}
-	to_file.close();
+	else
+		if (file = false)
+		{
+			for (int i = 0; i<size_x; i++)
+			{
+				if (i != 0)
+				{
+					cout << endl;
+				}
+				for (int j = 0; j<size_y; j++)
+				{
+					cout << tablica[i][j];
+				}
+			}
+		}
 }
