@@ -21,43 +21,43 @@ const int size_y = 96;
 const float half_of = 0.5;
 
 void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]);
-void tab(bool file, int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]);
+void tab( int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y], bool file);
 int main()
 {
 	srand(time(NULL));
-
+	
 	int pointD_x, pointD_y;
 	pointD_x = rand() % size_x;
 	pointD_y = rand() % size_y;
 
 	char tablica[size_x][size_y];
 	int lkrokow;
-	bool file=true||false;
-	char write = 't' || 'n';
+	bool file = false;
+	char letter;
 	cout << "Podaj ilosc krokow: ";
 	cin >> lkrokow;
-	while (write != 't' || 'n')
+	cout << "Czy wypisac do pliku?[Tak-t/Nie-n]: ";
+	cin >> letter;
+	while (letter == 't' || letter == 'n')
 	{
-		cout << "Czy chcesz wypisac dane do pliku[Tak-t/Nie-n]: ";
-		cin >> write;
-		if (write == 't')
+		if (letter == 't')
 		{
 			file = true;
-			tab(file, pointD_x, pointD_y, lkrokow, tablica);
 		}
 		else
-			if (write == 'n')
+			if (letter == 'n')
 			{
 				file = false;
-				tab(file, pointD_x, pointD_y, lkrokow, tablica);
 			}
 			else
-				if (write != 't' || 'n')
+				if (letter == 't' || letter == 'n')
 				{
-					cout << "Wpisa³es niepoprawna znak, sprobuj ponownie. " << endl;
+					cout << "wpisales niepoprawny znak. Sprobuj ponownie." << endl;
+					cout << "Czy wypisac do pliku?[Tak-t/Nie-n]: ";
 				}
-	} 
+	}
 
+	tab(pointD_x, pointD_y, lkrokow, tablica, file);
 	cin.get();
 	cin.get();
 	return 0;
@@ -91,7 +91,7 @@ void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]
 		}
 	}
 }
-void tab(bool file, int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y]) // rysuje tablice ,na której zostan¹ naniesione punkty
+void tab( int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y], bool file) // rysuje tablice ,na której zostan¹ naniesione punkty
 {
 
 	for (int i = 0; i<size_x; i++)
@@ -108,38 +108,29 @@ void tab(bool file, int pointD_x, int pointD_y, int lkrokow, char tablica[size_x
 
 	point(pointD_x, pointD_y, lkrokow, tablica);
 
-	if (file = true)
+	ofstream to_file;
+	if (file)
 	{
-		ofstream to_file;
 		to_file.open("dane.txt");
-		for (int i = 0; i<size_x; i++)
+	}
+	for (int i = 0; i<size_x; i++)
+	{
+		if (i != 0)
 		{
-			if (i != 0)
+			cout << endl;
+			if (file)
 			{
-				cout << endl;
 				to_file << endl;
 			}
+		}
 			for (int j = 0; j<size_y; j++)
 			{
 				cout << tablica[i][j];
-				to_file << tablica[i][j];
+				if (file)
+				{
+					to_file << tablica[i][j];
+				}
 			}
 		}
 		to_file.close();
-	}
-	else
-		if (file = false)
-		{
-			for (int i = 0; i<size_x; i++)
-			{
-				if (i != 0)
-				{
-					cout << endl;
-				}
-				for (int j = 0; j<size_y; j++)
-				{
-					cout << tablica[i][j];
-				}
-			}
-		}
 }
