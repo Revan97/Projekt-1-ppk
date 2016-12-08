@@ -7,6 +7,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ const float half_of = 0.5;
 
 void point(int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y], char sign);
 void tab( int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y], bool file, char sign);
+void box(char letter, char sign, bool &stop);
 int main()
 {
 	srand(time(NULL));
@@ -32,17 +34,25 @@ int main()
 
 	char tablica[size_x][size_y];
 	int lkrokow;
-	bool file = false;
+	bool file=false;
+	bool stop=false;
 	char letter;
 	char sign;
-	cout << "Podaj dowolny znak: ";
-	cin >> sign;
+	
 	cout << "Podaj ilosc krokow: ";
 	cin >> lkrokow;
 	cout << "Czy wypisac do pliku?[Tak-t/Nie-n]: ";
 	cin >> letter;
-	while (letter == 't' || letter == 'n')
+	cout << "Podaj dowolny znak: ";
+	cin >> sign;
+	box(letter, sign, stop);
+	if (stop)
 	{
+		cout << "program zatrzymany" << endl;
+		cin.get();
+		cin.get();
+		return 0;
+	}
 		if (letter == 't')
 		{
 			file = true;
@@ -52,14 +62,6 @@ int main()
 			{
 				file = false;
 			}
-			else
-				if (letter != 't' || letter != 'n')
-				{
-					cout << "wpisales niepoprawny znak. Sprobuj ponownie." << endl;
-					cout << "Czy wypisac do pliku?[Tak-t/Nie-n]: ";
-				}
-	}
-
 	tab(pointD_x, pointD_y, lkrokow, tablica, file, sign);
 	cin.get();
 	cin.get();
@@ -136,4 +138,36 @@ void tab( int pointD_x, int pointD_y, int lkrokow, char tablica[size_x][size_y],
 			}
 		}
 		to_file.close();
+}
+void box(char letter, char sign, bool &stop)
+{
+	switch (sign)
+	{
+	case '=':
+		cout << "bledna dana" << endl;
+		stop = true;
+		break;
+	case '0':
+		cout << "bledna dana" << endl;
+		stop = true;
+		break;
+	default:
+		cout << "wybrales znak: " << sign << endl;
+		break;
+
+	}
+	switch (letter)
+	{
+	case 't':
+		cout << "wypisales do pliku"  << endl;
+		break;
+	case 'n':
+		cout << "nie wypisales do pliku" << endl;
+		break;
+	default:
+		letter != 't' || letter != 't';
+		cout << "bledna dana" << endl;
+		stop = true;
+		break;
+	}
 }
