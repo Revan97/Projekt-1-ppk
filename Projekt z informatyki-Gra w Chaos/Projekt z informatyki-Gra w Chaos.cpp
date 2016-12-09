@@ -7,7 +7,6 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
-#include <string>
 
 using namespace std;
 
@@ -34,7 +33,7 @@ int main()
 
 	char tablica[size_x][size_y];
 	int lkrokow;
-	bool file=false;
+	bool file;
 	bool stop=false;
 	char letter;
 	char sign;
