@@ -57,10 +57,12 @@ int main()
 			file = true;
 		}
 		else
+		{
 			if (letter == 'n')
 			{
 				file = false;
 			}
+		}
 	tab(pointD_x, pointD_y, lkrokow, tablica, file, sign);
 	cin.get();
 	cin.get();
@@ -143,29 +145,28 @@ void box(char letter, char sign, bool &stop)
 	switch (sign)
 	{
 	case '=':
-		cout << "bledna dana" << endl;
+		cout << "Bledna dana" << endl;
 		stop = true;
 		break;
 	case '0':
-		cout << "bledna dana" << endl;
+		cout << "Bledna dana" << endl;
 		stop = true;
 		break;
 	default:
-		cout << "wybrales znak: " << sign << endl;
+		cout << "Wybrales znak: " << sign << endl;
 		break;
-
 	}
 	switch (letter)
 	{
 	case 't':
-		cout << "wypisales do pliku"  << endl;
+		cout << "Wypisales do pliku"  << endl;
 		break;
 	case 'n':
-		cout << "nie wypisales do pliku" << endl;
+		cout << "Nie wypisales do pliku" << endl;
 		break;
 	default:
 		letter != 't' || letter != 't';
-		cout << "bledna dana" << endl;
+		cout << "Bledna dana" << endl;
 		stop = true;
 		break;
 	}
